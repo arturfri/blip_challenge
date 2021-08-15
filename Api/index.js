@@ -9,10 +9,6 @@ app.get('/', (req, res) => res.send('Welcome!'))
 app.get('/github', async(req, res) => {
     try {
       const response = await axios.get('https://api.github.com/orgs/takenet/repos?direction=asc')
-      // console.log(Array.isArray(response.data))
-      // const topics = await axios.get(`https://api.github.com/repos/takenet/${response.data[0].name}/languages`,{headers: {
-      //   "Accept": "application/vnd.github.v3+json"
-      // }})
       const formatedValues = {}
       response.data.filter(r => r.language === 'C#').slice(0, 5).forEach((item, index) => {
         formatedValues[index] = {
