@@ -13,7 +13,16 @@ app.get('/github', async(req, res) => {
       // const topics = await axios.get(`https://api.github.com/repos/takenet/${response.data[0].name}/languages`,{headers: {
       //   "Accept": "application/vnd.github.v3+json"
       // }})
-      return res.send(response.data.filter(r => r.language === 'C#').slice(0, 5))
+      const formatedValues = {}
+      response.data.filter(r => r.language === 'C#').slice(0, 5).forEach((item, index) => {
+        formatedValues[index] = {
+          name: item.full_name,
+          description: item.description,
+          image: item.owner.avatar_url,
+        }
+      })
+      console.log(formatedValues)
+      return res.send(formatedValues)
     } catch (error) {
       console.log({error})
       console.log(error.data)
