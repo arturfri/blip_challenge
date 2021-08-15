@@ -4,6 +4,8 @@ const axios = require('axios')
 
 const PORT = process.env.PORT || 3333;
 
+app.get('/', (req, res) => res.send('Welcome!'))
+
 app.get('/github', async(req, res) => {
     try {
       const response = await axios.get('https://api.github.com/orgs/takenet/repos?direction=asc')
